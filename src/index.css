@@ -1,567 +1,491 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-html {
-  scroll-behavior: smooth;
+/* ----------- GLOBAL ----------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+body{
+  background:#f6f8fb;
+  color:#111827;
+  line-height:1.7;
 }
 
-body {
-  background: #111;
-  color: white;
-}
-
-/* NAVBAR */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px;
-}
-
-.logo img {
-  height: 48px;      /* adjust if needed */
-  width: auto;
-  object-fit: contain;
+/* smoother scrolling */
+html{
+  scroll-behavior:smooth;
 }
 
 
-/* Menu */
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 28px;
-  margin: 0;
-  padding: 0;
+/* ----------- NAVBAR ----------- */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:72px;
+  padding:0 80px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  background:black;
+  backdrop-filter:blur(10px);
+  box-shadow:0 2px 14px rgba(0,0,0,0.08);
 }
 
-/* Menu links */
-.navbar ul li a {
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  color: #ffffff;
-  position: relative;
-  transition: color 0.3s ease;
-}
+/* BIGGER LOGO WITHOUT PUSHING NAVBAR */
+/* LOGO */
 
-/* Hover underline animation */
-.navbar ul li a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0%;
-  height: 2px;
-  background-color: #ff6a00;
-  transition: width 0.3s ease;
-}
 
-.navbar ul li a:hover {
-  color: #ff6a00;
-}
+.logo img{
+  height:170px;        /* bigger */
+  width:auto;
+  max-width:400px;     /* makes it wider */
+  object-fit:contain;
 
-.navbar ul li a:hover::after {
-  width: 100%;
+  /* magic: pull it upward so navbar does not move */
+  margin-top:5px;
+  
 }
 
 
-/* HERO */
-/* HERO SECTION */
-.hero {
-  min-height: 95vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.navbar ul{
+  list-style:none;
+  display:flex;
+  gap:34px;
 }
 
-/* Dark overlay for readability */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+.navbar li{
+  cursor:pointer;
+  font-weight:600;
+  font-size:15px;
+  color:white;
+  letter-spacing:.3px;
+  transition:.25s;
 }
 
-/* Content */
-.hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 800px;
-  padding: 20px;
-  color: #fff;
-}
-
-.hero-content h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 15px;
-  line-height: 1.2;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  margin-bottom: 30px;
-}
-
-/* Buttons */
-.hero-buttons {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Primary button (WhatsApp) */
-.hero-buttons .primary {
-  background: #25d366; /* WhatsApp green */
-  color: #fff;
-  padding: 14px 28px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-}
-
-.hero-buttons .primary:hover {
-  background: #1ebe5d;
-  transform: translateY(-3px);
-}
-
-/* Secondary button */
-.hero-buttons .secondary {
-  background: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-  padding: 14px 28px;
-  border-radius: 30px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.hero-buttons .secondary:hover {
-  background: #fff;
-  color: #000;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2.2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
+.navbar li:hover{
+  color:#ea580c;   /* Ladakh orange accent */
 }
 
 
-/* SECTIONS */
-/* Scoped ONLY to this section */
-.section {
-  padding: 4rem 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
+/* ----------- HERO ----------- */
+.hero{
+  height:92vh;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
 }
 
-/* Section heading */
-.section > h2 {
-  text-align: center;
-  font-size: 2.4rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  color: #222;
-}
-
-/* Bike grid */
-.section .bikes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-/* Bike card */
-.section .bike-card {
-  background: #ffffff;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  position: relative;
-}
-
-/* Hover effect */
-.section .bike-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
-}
-
-/* Bike image */
-.section .bike-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
-
-/* Bike name overlay */
-.section .bike-card h3 {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  right: 14px;
-  margin: 0;
-  padding: 14px 16px;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #ffffff;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85),
-    rgba(0, 0, 0, 0.4)
+/* cinematic overlay */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.35),
+    rgba(0,0,0,.55),
+    rgba(0,0,0,.75)
   );
-  border-radius: 14px;
 }
 
-/* PRICE DROPDOWN */
-.bike-price {
-  background: linear-gradient(135deg, #ff9800, #ff5722);
-  color: #ffffff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 14px;
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:850px;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:64px;
+  font-weight:800;
+  line-height:1.15;
+  margin-bottom:18px;
+  text-shadow:0 10px 30px rgba(0,0,0,.7);
+}
+
+.hero p{
+  font-size:20px;
+  color:#e5e7eb;
+  margin-bottom:38px;
+}
+
+
+/* buttons */
+.hero-buttons{
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* primary */
+.primary{
+  background:linear-gradient(135deg,#f97316,#ea580c);
+  color:white;
+  padding:14px 34px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
+  transition:.25s;
+  box-shadow:0 10px 25px rgba(234,88,12,.35);
+}
+
+.primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 40px rgba(234,88,12,.55);
+}
+
+/* secondary */
+.secondary{
+  background:rgba(255,255,255,.9);
+  color:#111827;
+  padding:14px 32px;
+  border-radius:12px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.secondary:hover{
+  transform:translateY(-3px);
+  background:white;
+}
+
+
+/* ----------- SECTIONS ----------- */
+.section{
+  padding:100px 90px;
+  text-align:center;
+}
+
+.section h2{
+  font-size:40px;
+  margin-bottom:50px;
+  font-weight:800;
+  color:#0f172a;
+}
+
+
+/* ----------- BIKE CARDS ----------- */
+.bikes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+
+.bike-card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+  transition:.35s;
+  cursor:pointer;
+  overflow:hidden;
+}
+
+.bike-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+
+.bike-img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.bike-card h3{
+  margin-top:14px;
+  font-size:20px;
+  font-weight:700;
+}
+
+.bike-price{
+  margin-top:10px;
+  color:#ea580c;
+  font-weight:700;
+  font-size:19px;
+}
+
+
+/* ----------- WHY US ----------- */
+
+.why{
+  background:linear-gradient(135deg,#1f3a5f,#2c5364); /* mountain dusk blue */
+  color:white;
+  padding:55px 40px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:25px;
+  border-radius:18px;
+  margin:60px 70px;
+  box-shadow:0 10px 28px rgba(0,0,0,0.18);
+}
+
+.why h2{
+  width:100%;
+  margin-bottom:20px;
+  font-size:32px;
+  font-weight:700;
+}
+
+.why div{
+  background:rgba(255,255,255,0.08);
+  padding:16px 22px;
+  border-radius:12px;
+  backdrop-filter:blur(6px);
+  font-size:17px;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.why div:hover{
+  transform:translateY(-4px);
+  background:rgba(255,255,255,0.18);
+}
+
+
+/* ----------- STEPS ----------- */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.steps div{
+  background:white;
+  padding:22px;
+  border-radius:14px;
+  box-shadow:0 5px 14px rgba(0,0,0,0.08);
+  font-weight:500;
+}
+
+/* ----------- REVIEWS ----------- */
+.testimonial{
+  padding:100px 90px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+}
+
+/* form */
+.review-box{
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 14px 35px rgba(0,0,0,.1);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.review-box textarea,
+.review-box input,
+.review-box select{
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+  font-size:14px;
+  outline:none;
+}
+
+.review-box textarea:focus,
+.review-box input:focus,
+.review-box select:focus{
+  border-color:#f97316;
+}
+
+.review-box button{
+  background:linear-gradient(135deg,#f97316,#ea580c);
+  color:white;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.review-box button:hover{
+  transform:translateY(-2px);
+}
+.review-card{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.review-card h4{
+  font-weight:700;
+}
+
+.date{
+  font-size:12px;
+  color:#6b7280;
+}
+
+.stars{
+  color:#f59e0b;
+  margin:6px 0;
+  font-size:18px;
+}
+@media(max-width:900px){
+
+  .navbar{
+    padding:0 18px;
+  }
+
+  .logo img{
+    height:70px;
+  }
+
+  .section{
+    padding:70px 20px;
+  }
+
+  .testimonial{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .why{
+    margin:60px 20px;
+  }
+}
+
+.prices-page{
+  padding-bottom:80px;
+}
+
+.price-hero{
+  height:40vh;
+  background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+  url('/ladakh-mountains.jpg') center/cover no-repeat;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  text-align:center;
+}
+
+.price-hero h1{
+  font-size:46px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.price-hero p{
+  font-size:18px;
+  opacity:.9;
+}
+.price-grid{
+  padding:70px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+.price-card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 12px 28px rgba(0,0,0,0.12);
+  transition:.35s;
+  position:relative;
+}
+
+.price-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 18px 40px rgba(0,0,0,0.18);
+}
+.img-wrapper{
+  position:relative;
+  height:210px;
+  overflow:hidden;
+}
+
+.img-wrapper img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.5s;
+}
+
+.price-card:hover img{
+  transform:scale(1.08);
+}
+.tag{
+  position:absolute;
+  top:14px;
+  left:14px;
+  background:#ea580c; /* Ladakh orange */
+  color:white;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+}
+.card-body{
+  padding:20px;
+  text-align:center;
+}
+
+.card-body h2{
+  margin-bottom:12px;
+  font-size:22px;
+}
+.price{
+  margin:10px 0 20px 0;
+}
+
+.amount{
+  font-size:30px;
+  font-weight:700;
+  color:#ea580c;
+}
+
+.day{
+  color:#6b7280;
+  font-size:14px;
+  margin-left:4px;
+}
+.book-btn{
+  background:#1f2937;
+  color:white;
+  border:none;
+  padding:12px 22px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+  width:100%;
+}
+
+.book-btn:hover{
+  background:#ea580c;
+}
+
+.footer {
   text-align: center;
-  animation: slideDown 0.35s ease forwards;
-}
-
-/* Smooth dropdown animation */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* WHY */
-/* WHY section container */
-.why {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 40px 30px;
-  text-align: center;
-  border-radius: 18px;
-  max-width: 1200px;
-  margin: 3rem auto;
-}
-
-/* Section heading */
-.why h2 {
-  grid-column: 1 / -1; /* span full width */
-  color: #ffffff;
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-/* Each feature item */
-.why > div {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  padding: 18px 16px;
-  border-radius: 14px;
-  font-size: 1.05rem;
-  font-weight: 500;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-/* Hover effect */
-.why > div:hover {
-  transform: translateY(-6px);
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Tablet */
-@media (max-width: 900px) {
-  .why {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Mobile */
-@media (max-width: 500px) {
-  .why {
-    grid-template-columns: 1fr;
-    padding: 30px 20px;
-  }
-
-  .why h2 {
-    font-size: 1.8rem;
-  }
-}
-
-
-/* STEPS */
-/* HOW IT WORKS section */
-
-
-/* Section heading */
-.section > h2 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-}
-
-/* Steps container as flex timeline */
-.section .steps {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  position: relative;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-/* Connecting line between steps */
-.section .steps::before {
-  content: "";
-  position: absolute;
-  top: 30px; /* align with circle center */
-  left: 5%;
-  right: 5%;
-  height: 4px;
-  background: #e0e0e0;
-  z-index: 0;
-}
-
-/* Each step */
-.section .steps > div {
-  position: relative;
-  flex: 1;
-  min-width: 180px;
-  text-align: center;
-  z-index: 1;
-}
-
-/* Step circle */
-.section .steps > div::before {
-  content: counter(step);
-  counter-increment: step;
-  width: 60px;
-  height: 60px;
-  background: #1a7f37; /* green circle */
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease;
-}
-
-/* Reset step counter */
-.section .steps {
-  counter-reset: step;
-}
-
-/* Hover effect on circle */
-.section .steps > div:hover::before {
-  transform: scale(1.1);
-}
-
-/* Step text */
-.section .steps > div p {
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: #333;
-  line-height: 1.4;
-  margin: 0;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 600px) {
-  .section .steps {
-    flex-direction: column;
-    align-items: center;
-  }
-  .section .steps::before {
-    left: 50%;
-    top: 0;
-    width: 4px;
-    height: 100%;
-  }
-}
-
-
-/* TESTIMONIAL */
-/* TESTIMONIAL section wrapper */
-.testimonial {
-  max-width: 1000px;
-  margin: 4rem auto;
-  padding: 0 1.5rem;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-}
-
-/* Existing reviews */
-.testimonial .existing-reviews {
-  margin-bottom: 3rem;
-}
-
-.testimonial .existing-reviews h2 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: #1a7f37; /* premium green heading */
-}
-
-.testimonial .existing-reviews p {
-  background: #f9f9f9;
-  padding: 1rem 1.2rem;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #333;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease;
-}
-
-.testimonial .existing-reviews p:hover {
-  transform: translateY(-3px);
-}
-
-/* Review box */
-.testimonial .review-box {
-  background: #ffffff;
-  padding: 2rem 1.5rem;
-  border-radius: 18px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.testimonial .review-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-}
-
-/* Review box heading */
-.testimonial .review-box h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #1a7f37;
-}
-
-/* Textarea and inputs */
-.testimonial .review-box textarea,
-.testimonial .review-box input {
-  width: 100%;
-  padding: 0.9rem 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  font-size: 1rem;
-  resize: none;
-  outline: none;
-  transition: border 0.3s ease;
-}
-
-.testimonial .review-box textarea:focus,
-.testimonial .review-box input:focus {
-  border-color: #1a7f37;
-  box-shadow: 0 0 6px rgba(26,127,55,0.3);
-}
-
-/* Submit button */
-.testimonial .review-box button {
-  display: block;
-  width: 100%;
-  background: #1a7f37;
-  color: #fff;
-  font-weight: 600;
-  font-size: 1.05rem;
-  padding: 0.9rem 0;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.testimonial .review-box button:hover {
-  background: #14592c;
-  transform: translateY(-2px);
-}
-
-/* Mobile responsiveness */
-@media (max-width: 600px) {
-  .testimonial {
-    padding: 0 1rem;
-  }
-
-  .testimonial .existing-reviews h2 {
-    font-size: 1.8rem;
-  }
-
-  .testimonial .review-box h3 {
-    font-size: 1.3rem;
-  }
-
-  .testimonial .review-box textarea,
-  .testimonial .review-box input {
-    font-size: 0.95rem;
-    padding: 0.8rem 0.9rem;
-  }
-
-  .testimonial .review-box button {
-    font-size: 1rem;
-    padding: 0.8rem 0;
-  }
-}
-
-
-.contact-box {
-  background: #222;
   padding: 20px;
-}
-
-.contact-box a {
-  display: inline-block;
-  margin-top: 10px;
-  background: #c0392b;
-  padding: 10px;
-  color: white;
-  text-decoration: none;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 40px;
 }

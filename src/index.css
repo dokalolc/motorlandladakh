@@ -12,7 +12,6 @@ body{
   line-height:1.7;
 }
 
-/* smoother scrolling */
 html{
   scroll-behavior:smooth;
 }
@@ -28,27 +27,18 @@ html{
   display:flex;
   justify-content:space-between;
   align-items:center;
-
   background:black;
   backdrop-filter:blur(10px);
   box-shadow:0 2px 14px rgba(0,0,0,0.08);
 }
 
-/* BIGGER LOGO WITHOUT PUSHING NAVBAR */
-/* LOGO */
-
-
 .logo img{
-  height:170px;        /* bigger */
+  height:170px;
   width:auto;
-  max-width:400px;     /* makes it wider */
+  max-width:400px;
   object-fit:contain;
-
-  /* magic: pull it upward so navbar does not move */
   margin-top:5px;
-  
 }
-
 
 .navbar ul{
   list-style:none;
@@ -65,8 +55,21 @@ html{
   transition:.25s;
 }
 
-.navbar li:hover{
-  color:#ea580c;   /* Ladakh orange accent */
+.navbar li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.navbar li a:hover {
+  color: #e74c3c;
+  border-color: #e74c3c;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.6), 0 0 20px rgba(231, 76, 60, 0.3);
+  text-shadow: 0 0 8px rgba(231, 76, 60, 0.8);
 }
 
 
@@ -83,7 +86,6 @@ html{
   color:white;
 }
 
-/* cinematic overlay */
 .hero::after{
   content:"";
   position:absolute;
@@ -117,8 +119,6 @@ html{
   margin-bottom:38px;
 }
 
-
-/* buttons */
 .hero-buttons{
   display:flex;
   gap:18px;
@@ -126,7 +126,6 @@ html{
   flex-wrap:wrap;
 }
 
-/* primary */
 .primary{
   background:linear-gradient(135deg,#f97316,#ea580c);
   color:white;
@@ -143,7 +142,6 @@ html{
   box-shadow:0 16px 40px rgba(234,88,12,.55);
 }
 
-/* secondary */
 .secondary{
   background:rgba(255,255,255,.9);
   color:#111827;
@@ -153,6 +151,8 @@ html{
   font-weight:600;
   cursor:pointer;
   transition:.25s;
+  text-decoration:none;
+  display:inline-block;
 }
 
 .secondary:hover{
@@ -219,9 +219,8 @@ html{
 
 
 /* ----------- WHY US ----------- */
-
 .why{
-  background:linear-gradient(135deg,#1f3a5f,#2c5364); /* mountain dusk blue */
+  background:linear-gradient(135deg,#1f3a5f,#2c5364);
   color:white;
   padding:55px 40px;
   display:flex;
@@ -272,6 +271,7 @@ html{
   font-weight:500;
 }
 
+
 /* ----------- REVIEWS ----------- */
 .testimonial{
   padding:100px 90px;
@@ -280,7 +280,6 @@ html{
   gap:60px;
 }
 
-/* form */
 .review-box{
   background:white;
   padding:30px;
@@ -321,6 +320,7 @@ html{
 .review-box button:hover{
   transform:translateY(-2px);
 }
+
 .review-card{
   background:white;
   padding:20px;
@@ -342,40 +342,29 @@ html{
   margin:6px 0;
   font-size:18px;
 }
-@media(max-width:900px){
 
-  .navbar{
-    padding:0 18px;
-  }
 
-  .logo img{
-    height:70px;
-  }
-
-  .section{
-    padding:70px 20px;
-  }
-
-  .testimonial{
-    grid-template-columns:1fr;
-  }
-
-  .hero h1{
-    font-size:40px;
-  }
-
-  .why{
-    margin:60px 20px;
-  }
+/* ----------- FOOTER ----------- */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 40px;
 }
 
+
+/* ----------- PRICES PAGE (BLACK & RED THEME) ----------- */
 .prices-page{
+  background:#0a0a0a;
+  min-height:100vh;
   padding-bottom:80px;
 }
 
 .price-hero{
   height:40vh;
-  background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+  background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)),
   url('/ladakh-mountains.jpg') center/cover no-repeat;
   display:flex;
   flex-direction:column;
@@ -383,37 +372,44 @@ html{
   justify-content:center;
   color:white;
   text-align:center;
+  border-bottom:2px solid #c0392b;
 }
 
 .price-hero h1{
   font-size:46px;
   font-weight:700;
   margin-bottom:10px;
+  color:#fff;
 }
 
 .price-hero p{
   font-size:18px;
-  opacity:.9;
+  color:#aaa;
 }
+
 .price-grid{
   padding:70px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:32px;
 }
+
 .price-card{
-  background:white;
+  background:#1a1a1a;
   border-radius:18px;
   overflow:hidden;
-  box-shadow:0 12px 28px rgba(0,0,0,0.12);
+  border:1px solid #2a2a2a;
+  box-shadow:0 12px 28px rgba(0,0,0,0.5);
   transition:.35s;
   position:relative;
 }
 
 .price-card:hover{
   transform:translateY(-10px);
-  box-shadow:0 18px 40px rgba(0,0,0,0.18);
+  box-shadow:0 18px 40px rgba(192,57,43,0.35);
+  border-color:#c0392b;
 }
+
 .img-wrapper{
   position:relative;
   height:210px;
@@ -430,17 +426,19 @@ html{
 .price-card:hover img{
   transform:scale(1.08);
 }
+
 .tag{
   position:absolute;
   top:14px;
   left:14px;
-  background:#ea580c; /* Ladakh orange */
+  background:#c0392b;
   color:white;
   padding:6px 12px;
   border-radius:20px;
   font-size:12px;
   font-weight:600;
 }
+
 .card-body{
   padding:20px;
   text-align:center;
@@ -449,7 +447,9 @@ html{
 .card-body h2{
   margin-bottom:12px;
   font-size:22px;
+  color:#fff;
 }
+
 .price{
   margin:10px 0 20px 0;
 }
@@ -457,16 +457,17 @@ html{
 .amount{
   font-size:30px;
   font-weight:700;
-  color:#ea580c;
+  color:#e74c3c;
 }
 
 .day{
-  color:#6b7280;
+  color:#888;
   font-size:14px;
   margin-left:4px;
 }
+
 .book-btn{
-  background:#1f2937;
+  background:#c0392b;
   color:white;
   border:none;
   padding:12px 22px;
@@ -478,14 +479,39 @@ html{
 }
 
 .book-btn:hover{
-  background:#ea580c;
+  background:#a93226;
+  transform:translateY(-2px);
 }
 
-.footer {
-  text-align: center;
-  padding: 20px;
-  background: #111;
-  color: #fff;
-  font-size: 14px;
-  margin-top: 40px;
+
+/* ----------- RESPONSIVE ----------- */
+@media(max-width:900px){
+  .navbar{
+    padding:0 18px;
+  }
+
+  .logo img{
+    height:70px;
+  }
+
+  .section{
+    padding:70px 20px;
+  }
+
+  .testimonial{
+    grid-template-columns:1fr;
+    padding:60px 20px;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .why{
+    margin:60px 20px;
+  }
+
+  .price-grid{
+    padding:30px 20px;
+  }
 }

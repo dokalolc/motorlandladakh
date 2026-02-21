@@ -67,7 +67,7 @@ const GLOBAL_CSS = `
     border-bottom: 1px solid var(--border);
     transition: background 0.3s;
   }
-  .navbar .logo img { height: 44px; object-fit: contain; }
+  .navbar .logo img { height: 250px; margin-left: -110px; object-fit: contain; }
   .navbar ul { display: flex; gap: 36px; list-style: none; }
   .navbar ul li a {
     font-family: 'Rajdhani', sans-serif;
@@ -689,7 +689,7 @@ const whyItems = [
   { icon: "⚡", title: "Instant WhatsApp Booking", desc: "No long forms. Chat with us directly and confirm your ride in minutes." },
   { icon: "🛠️", title: "24/7 Roadside Support", desc: "Our local mechanics and support staff cover the entire Ladakh circuit." },
   { icon: "📍", title: "Drop at Any Location", desc: "We deliver and pick up at Leh airport, hotels, or any point you choose." },
-  { icon: "✅", title: "Serviced Before Every Ride", desc: "Every bike is inspected, serviced, and fueled before handover." },
+  
 ];
 
 const steps = [
@@ -780,7 +780,7 @@ export default function Home() {
         />
         <div className="hero-overlay" />
         <div className="hero-content">
-          <p className="hero-eyebrow fade-up delay-1">Ladakh Bike Rentals</p>
+          
           <h1 className="fade-up delay-2">
             Ride The<br />
             <span>Roof of</span><br />
@@ -788,7 +788,7 @@ export default function Home() {
           </h1>
           <p className="hero-sub fade-up delay-3">
             Premium motorcycles for the world's highest roads.
-            Leh–Manali, Khardung La, Pangong Lake — your legend starts here.
+            Khardung La, Mig La, Pangong Lake — your legend starts here.
           </p>
           <div className="hero-buttons fade-up delay-4">
             <a

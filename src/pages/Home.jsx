@@ -254,7 +254,7 @@ const GLOBAL_CSS = `
     font-size: 13px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--red);
     margin-top: 4px;
   }
 
@@ -266,7 +266,7 @@ const GLOBAL_CSS = `
     font-size: 12px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--orange);
+    color: var(--red);
     margin-bottom: 12px;
     display: flex;
     align-items: center;
@@ -276,13 +276,13 @@ const GLOBAL_CSS = `
     content: '';
     display: inline-block;
     width: 20px; height: 2px;
-    background: var(--orange);
+    background: var(--red);
   }
   .section-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(36px, 5vw, 64px);
     letter-spacing: 1px;
-    color: #f5f0e8;
+    color: var;
     margin-bottom: 56px;
     line-height: 1;
   }
@@ -854,7 +854,7 @@ export default function Home() {
           <li><Link to="/contact">Contact</Link></li>
         </ul>
         <a
-          href="https://wa.me/917051829813?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
+          href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
           target="_blank"
           rel="noopener noreferrer"
           className="navbar-cta"
@@ -882,7 +882,7 @@ export default function Home() {
           </p>
           <div className="hero-buttons fade-up delay-4">
             <a
-              href="https://wa.me/917051829813?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
+              href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
@@ -954,7 +954,7 @@ export default function Home() {
 
       {/* ── WHY US ── */}
       <section className="section" style={{ paddingTop: 0 }}>
-        <p className="section-eyebrow">Why Motor Land Ladakh</p>
+        <p className="section-eyebrow">Why Motor Land Ladakh ?</p>
         <h2 className="section-title">Everything You Need</h2>
         <div className="why-grid">
           {whyItems.map((w) => (
@@ -985,14 +985,14 @@ export default function Home() {
       {/* ── CTA BANNER ── */}
       <div className="cta-banner">
         <div className="cta-banner-text">
-          <h2>Ready to Conquer Khardung La?</h2>
+          <h2>Ready to Conquer the mighty Umling La?</h2>
           <p>
             The world's highest motorable road awaits. Drop us a WhatsApp message and we'll have your bike ready within hours.
           </p>
         </div>
         <div className="cta-banner-actions">
           <a
-            href="https://wa.me/917051829813?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
+            href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"
@@ -1115,7 +1115,7 @@ export default function Home() {
           <Link to="/prices">Bikes</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
-          <a href="https://wa.me/917051829813" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="https://wa.me/919797545493" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </nav>
       </footer>
 

@@ -282,7 +282,7 @@ const GLOBAL_CSS = `
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(36px, 5vw, 64px);
     letter-spacing: 1px;
-    color: #fff;
+    color: #f5f0e8;
     margin-bottom: 56px;
     line-height: 1;
   }
@@ -409,7 +409,7 @@ const GLOBAL_CSS = `
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
     font-size: 18px;
-    color: #fff;
+    color: #f5f0e8;
     margin-bottom: 8px;
     letter-spacing: 0.5px;
   }
@@ -463,7 +463,7 @@ const GLOBAL_CSS = `
     font-weight: 700;
     font-size: 16px;
     letter-spacing: 0.5px;
-    color: #fff;
+    color: #f5f0e8;
     margin-bottom: 8px;
   }
   .step-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
@@ -497,7 +497,7 @@ const GLOBAL_CSS = `
   .cta-banner-text h2 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(32px, 4vw, 52px);
-    color: #fff;
+    color: #f5f0e8;
     letter-spacing: 1px;
     margin-bottom: 12px;
     line-height: 1;
@@ -519,12 +519,50 @@ const GLOBAL_CSS = `
     padding: 24px 26px;
     margin-bottom: 16px;
     transition: border-color 0.25s;
+    position: relative;
   }
   .review-card:hover { border-color: rgba(255,255,255,0.12); }
   .review-stars { font-size: 15px; margin-bottom: 10px; letter-spacing: 1px; }
   .review-text { font-size: 15px; color: rgba(232,228,220,0.8); line-height: 1.65; font-style: italic; margin-bottom: 14px; }
   .review-author { font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 1px; color: var(--orange); }
   .review-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ── Delete button ── */
+  .review-delete-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(230,51,41,0.08);
+    border: 1px solid rgba(230,51,41,0.2);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .review-card:hover .review-delete-btn {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .review-delete-btn:hover {
+    background: rgba(230,51,41,0.18);
+    border-color: var(--red);
+    color: #ff6b6b;
+    transform: scale(1.04);
+  }
+  .review-delete-btn.deleting {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   /* ── Form ── */
   .review-form {
@@ -539,7 +577,7 @@ const GLOBAL_CSS = `
     font-family: 'Bebas Neue', sans-serif;
     font-size: 28px;
     letter-spacing: 1px;
-    color: #fff;
+    color: #f5f0e8;
     margin-bottom: 4px;
   }
   .form-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
@@ -568,6 +606,7 @@ const GLOBAL_CSS = `
   }
   .form-field:focus { border-color: rgba(230,51,41,0.5); background: rgba(255,255,255,0.06); }
   .form-field::placeholder { color: rgba(122,118,112,0.7); }
+  .form-field option { background: var(--card); color: var(--text); }
   .form-submit {
     width: 100%;
     background: var(--red);
@@ -588,6 +627,11 @@ const GLOBAL_CSS = `
     background: #c62620;
     transform: translateY(-1px);
     box-shadow: 0 8px 28px rgba(230,51,41,0.5);
+  }
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
   }
 
   /* ── Footer ── */
@@ -638,6 +682,7 @@ const GLOBAL_CSS = `
     .steps-grid::before { display: none; }
     .cta-banner { flex-direction: column; margin: 0 24px 60px; padding: 40px 28px; }
     .footer { padding: 30px 24px; flex-direction: column; align-items: flex-start; }
+    .review-delete-btn { opacity: 1; pointer-events: all; }
   }
 
   /* ── Animations ── */
@@ -650,6 +695,15 @@ const GLOBAL_CSS = `
   .delay-2 { animation-delay: 0.22s; }
   .delay-3 { animation-delay: 0.38s; }
   .delay-4 { animation-delay: 0.52s; }
+
+  @keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.95); }
+  }
+  .review-card.removing {
+    animation: fadeOut 0.3s ease forwards;
+    pointer-events: none;
+  }
 `;
 
 const bikes = [
@@ -689,7 +743,6 @@ const whyItems = [
   { icon: "⚡", title: "Instant WhatsApp Booking", desc: "No long forms. Chat with us directly and confirm your ride in minutes." },
   { icon: "🛠️", title: "24/7 Roadside Support", desc: "Our local mechanics and support staff cover the entire Ladakh circuit." },
   { icon: "📍", title: "Drop at Any Location", desc: "We deliver and pick up at Leh airport, hotels, or any point you choose." },
-  
 ];
 
 const steps = [
@@ -705,17 +758,17 @@ export default function Home() {
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [form, setForm] = useState({ name: "", rating: 5, message: "" });
   const [reviews, setReviews] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [removingIds, setRemovingIds] = useState(new Set());
   const heroBgRef = useRef(null);
 
   useEffect(() => {
-    // inject global CSS
     if (!document.getElementById("mll-global-css")) {
       const style = document.createElement("style");
       style.id = "mll-global-css";
       style.textContent = GLOBAL_CSS;
       document.head.appendChild(style);
     }
-    // pre-load hero
     const img = new Image();
     img.src = heroImg;
     img.onload = () => setHeroLoaded(true);
@@ -738,14 +791,52 @@ export default function Home() {
 
   const submitReview = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.message) { alert("Please fill all fields"); return; }
+    if (!form.name.trim() || !form.message.trim()) {
+      alert("Please fill all fields");
+      return;
+    }
+    setSubmitting(true);
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, form);
       setForm({ name: "", rating: 5, message: "" });
       fetchReviews();
-    } catch {
-      alert("Server not running");
+    } catch (err) {
+      console.error("Submit error:", err.response?.data || err.message);
+      alert(`Error: ${err.response?.data?.msg || err.message}`);
+    } finally {
+      setSubmitting(false);
     }
+  };
+
+  // ── Delete a review with a smooth fade-out animation ──
+  const deleteReview = async (id) => {
+    if (!window.confirm("Delete this review?")) return;
+
+    // Trigger fade-out animation first
+    setRemovingIds((prev) => new Set(prev).add(id));
+
+    // Wait for animation then call API and remove from state
+    setTimeout(async () => {
+      try {
+        await axios.delete(`${import.meta.env.VITE_API_URL}/reviews/${id}`);
+        setReviews((prev) => prev.filter((r) => r._id !== id));
+      } catch (err) {
+        console.error("Delete error:", err.response?.data || err.message);
+        alert("Could not delete review. Please try again.");
+        // Restore on failure
+        setRemovingIds((prev) => {
+          const next = new Set(prev);
+          next.delete(id);
+          return next;
+        });
+      } finally {
+        setRemovingIds((prev) => {
+          const next = new Set(prev);
+          next.delete(id);
+          return next;
+        });
+      }
+    }, 300);
   };
 
   return (
@@ -780,7 +871,6 @@ export default function Home() {
         />
         <div className="hero-overlay" />
         <div className="hero-content">
-          
           <h1 className="fade-up delay-2">
             Ride The<br />
             <span>Roof of</span><br />
@@ -921,7 +1011,7 @@ export default function Home() {
 
           {/* Left: reviews list */}
           <div>
-            {/* Static */}
+            {/* Static reviews — no delete button */}
             {[
               { text: "Best decision of my life. The Himalayan 450 handled Khardung La like a dream. Pickup was smooth and the team was incredibly helpful.", author: "Rahul S.", location: "Delhi", rating: 5 },
               { text: "Rented the KTM 390 for the Manali–Leh route. Zero issues, perfectly serviced, and the gear they provided was a lifesaver!", author: "Priya M.", location: "Mumbai", rating: 5 },
@@ -934,22 +1024,42 @@ export default function Home() {
               </div>
             ))}
 
-            {/* Dynamic */}
+            {/* Dynamic reviews — with delete button */}
             {reviews.length > 0 && (
               <div style={{ marginTop: "16px" }}>
                 {reviews.map((r) => (
-                  <div className="review-card" key={r._id}>
+                  <div
+                    className={`review-card ${removingIds.has(r._id) ? "removing" : ""}`}
+                    key={r._id}
+                  >
+                    {/* Delete button — appears on hover */}
+                    <button
+                      className={`review-delete-btn ${removingIds.has(r._id) ? "deleting" : ""}`}
+                      onClick={() => deleteReview(r._id)}
+                      title="Delete review"
+                    >
+                      🗑 Delete
+                    </button>
+
                     <p className="review-stars">{"⭐".repeat(r.rating)}</p>
                     <p className="review-text">"{r.message}"</p>
                     <p className="review-author">{r.name}</p>
-                    <p className="review-date">{new Date(r.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</p>
+                    <p className="review-date">
+                      {new Date(r.createdAt).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </p>
                   </div>
                 ))}
               </div>
             )}
 
             {reviews.length === 0 && (
-              <p style={{ color: "var(--muted)", fontSize: "14px", marginTop: "16px" }}>No community reviews yet — be the first!</p>
+              <p style={{ color: "var(--muted)", fontSize: "14px", marginTop: "16px" }}>
+                No community reviews yet — be the first!
+              </p>
             )}
           </div>
 
@@ -988,7 +1098,9 @@ export default function Home() {
               <option value="1">⭐ Bad</option>
             </select>
 
-            <button type="submit" className="form-submit">Post Review</button>
+            <button type="submit" className="form-submit" disabled={submitting}>
+              {submitting ? "Posting..." : "Post Review"}
+            </button>
           </form>
         </div>
       </section>

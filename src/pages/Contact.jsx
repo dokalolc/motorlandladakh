@@ -111,9 +111,10 @@ export default function Contact() {
         </a>
       </div>
 
-      {/* FOOTER */}
+     
+       {/* FOOTER */}
       <footer className="footer">
-        <p>© JullayTech@2026. All rights reserved.</p>
+        <p>© DrukTechnologies@2026. All rights reserved.</p>
       </footer>
     </div>
   );

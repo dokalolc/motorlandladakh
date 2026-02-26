@@ -67,8 +67,8 @@ const GLOBAL_CSS = `
     border-bottom: 1px solid var(--border);
     transition: background 0.3s;
   }
-  .navbar .logo img { height: 250px; margin-left: -110px; object-fit: contain; }
-  .navbar ul { display: flex; gap: 36px; list-style: none; }
+  .navbar .logo img { height: 275px; margin-left: -110px; object-fit: contain; }
+  .navbar ul { display: flex; gap: 36px; list-style: none; position: absolute; left: 50%; transform: translateX(-50%); }
   .navbar ul li a {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 600;

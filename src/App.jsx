@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Prices from "./pages/Prices";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Packages from "./pages/Packages";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/prices" element={<Prices />} /> {/* Prices.jsx */}
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/packages" element={<Packages />} />
       </Routes>
     </BrowserRouter>
   );

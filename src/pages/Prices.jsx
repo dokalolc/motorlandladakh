@@ -568,7 +568,7 @@ export default function Prices() {
   }, []);
 
   const bookBike = (bikeName) => {
-    const phone = "917051829813";
+    const phone = "919797545493";
     const message = `Hi, I want to rent the ${bikeName} in Ladakh.`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
   };
@@ -588,7 +588,7 @@ export default function Prices() {
           <li><Link to="/contact">Contact</Link></li>
         </ul>
         <a
-          href="https://wa.me/917051829813?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
+          href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
           target="_blank"
           rel="noopener noreferrer"
           className="navbar-cta"
@@ -694,7 +694,7 @@ export default function Prices() {
           <Link to="/prices">Bikes</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
-          <a href="https://wa.me/917051829813" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="https://wa.me/919797545493" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </nav>
       </footer>
 

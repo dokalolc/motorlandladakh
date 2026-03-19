@@ -44,8 +44,8 @@ export default function Contact() {
       }}>
         {[
           { icon: "📍", label: "Location", value: "Leh, Ladakh" },
-          { icon: "📞", label: "Phone / WhatsApp", value: "+91 70518 29813" },
-          { icon: "✉️", label: "Email", value: "motorlandladakh@gmail.com" },
+          { icon: "📞", label: "Phone / WhatsApp", value: "+91 9797545493" },
+          { icon: "✉️", label: "Email", value: "Motorlandladakh42@gmail.com" },
         ].map((item, i) => (
           <div key={i} style={{
             background: "#1a1a1a",
@@ -81,7 +81,7 @@ export default function Contact() {
 
         {/* WhatsApp Button */}
         <a
-          href="https://wa.me/917051829813?text=Hi%20I%20want%20to%20book%20a%20bike"
+          href="https://wa.me/919797545493?text=Hi%20I%20want%20to%20book%20a%20bike"
           target="_blank"
           rel="noopener noreferrer"
           style={{

@@ -90,7 +90,7 @@ export default function About() {
 
         {/* CTA */}
         <a
-          href="https://wa.me/917051829813?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
+          href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
           target="_blank"
           rel="noopener noreferrer"
           style={{

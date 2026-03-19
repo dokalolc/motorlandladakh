@@ -90,6 +90,22 @@ const GLOBAL_CSS = `
   }
   .navbar ul li a:hover { color: #fff; }
   .navbar ul li a:hover::after { width: 100%; }
+  .navbar ul li a.nav-packages {
+    color: var(--orange);
+    position: relative;
+  }
+  .navbar ul li a.nav-packages::before {
+    content: '★';
+    font-size: 8px;
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    letter-spacing: 0;
+  }
+  .navbar ul li a.nav-packages:hover { color: var(--gold); }
+  .navbar ul li a.nav-packages::after { background: var(--gold); }
   .navbar-cta {
     background: var(--red);
     color: #fff !important;
@@ -226,6 +242,28 @@ const GLOBAL_CSS = `
     border-color: rgba(255,255,255,0.4);
     transform: translateY(-2px);
   }
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+    color: #0c0c0e;
+    padding: 15px 32px;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(240,192,64,0.35);
+  }
+  .btn-gold:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(240,192,64,0.5);
+  }
 
   /* ── Stats strip ── */
   .stats-strip {
@@ -254,7 +292,7 @@ const GLOBAL_CSS = `
     font-size: 13px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--muted);
     margin-top: 4px;
   }
 
@@ -266,7 +304,7 @@ const GLOBAL_CSS = `
     font-size: 12px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--orange);
     margin-bottom: 12px;
     display: flex;
     align-items: center;
@@ -276,13 +314,13 @@ const GLOBAL_CSS = `
     content: '';
     display: inline-block;
     width: 20px; height: 2px;
-    background: var(--red);
+    background: var(--orange);
   }
   .section-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(36px, 5vw, 64px);
     letter-spacing: 1px;
-    color: var;
+    color: #f5f0e8;
     margin-bottom: 56px;
     line-height: 1;
   }
@@ -467,6 +505,205 @@ const GLOBAL_CSS = `
     margin-bottom: 8px;
   }
   .step-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Packages Teaser Section ── */
+  .packages-teaser {
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .packages-teaser::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(240,192,64,0.4), transparent);
+  }
+  .packages-teaser::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(240,192,64,0.4), transparent);
+  }
+  .pkg-teaser-bg-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 400px;
+    background: radial-gradient(ellipse at center, rgba(240,192,64,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .pkg-teaser-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    gap: 24px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .pkg-teaser-title-block { flex: 1; }
+  .pkg-teaser-eyebrow {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pkg-teaser-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 20px; height: 2px;
+    background: var(--gold);
+  }
+  .pkg-teaser-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5.5vw, 72px);
+    letter-spacing: 1px;
+    color: #f5f0e8;
+    line-height: 0.95;
+    margin-bottom: 14px;
+  }
+  .pkg-teaser-title span { color: var(--gold); }
+  .pkg-teaser-subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 380px;
+    line-height: 1.6;
+  }
+  .pkg-scroll-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 40px;
+  }
+  .pkg-mini-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    transition: transform 0.3s cubic-bezier(.23,1,.32,1),
+                box-shadow 0.3s,
+                border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .pkg-mini-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--orange));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .pkg-mini-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(240,192,64,0.12);
+    border-color: rgba(240,192,64,0.25);
+  }
+  .pkg-mini-card:hover::before { transform: scaleX(1); }
+  .pkg-mini-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    line-height: 1;
+    color: rgba(240,192,64,0.12);
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    letter-spacing: 1px;
+  }
+  .pkg-mini-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .pkg-mini-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: #f5f0e8;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    line-height: 1.1;
+  }
+  .pkg-mini-route {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+  .pkg-mini-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .pkg-mini-days {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+  .pkg-mini-arrow {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(240,192,64,0.08);
+    border: 1px solid rgba(240,192,64,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    color: var(--gold);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .pkg-mini-card:hover .pkg-mini-arrow {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #0c0c0e;
+  }
+  .pkg-teaser-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .pkg-more-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pkg-more-badge::before, .pkg-more-badge::after {
+    content: '';
+    display: inline-block;
+    width: 40px; height: 1px;
+    background: var(--border);
+  }
 
   /* ── Landscape CTA banner ── */
   .cta-banner {
@@ -667,6 +904,8 @@ const GLOBAL_CSS = `
   /* ── Responsive ── */
   @media (max-width: 1024px) {
     .section { padding: 80px 40px; }
+    .packages-teaser { padding: 80px 40px; }
+    .pkg-scroll-row { grid-template-columns: repeat(2, 1fr); }
     .cta-banner { margin: 0 40px 80px; padding: 40px; }
     .reviews-layout { grid-template-columns: 1fr; }
     .review-form { position: static; }
@@ -678,6 +917,8 @@ const GLOBAL_CSS = `
     .hero-content { padding: 0 28px 60px; }
     .stats-strip { grid-template-columns: repeat(2,1fr); }
     .section { padding: 60px 24px; }
+    .packages-teaser { padding: 60px 24px; }
+    .pkg-scroll-row { grid-template-columns: 1fr; }
     .steps-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
     .steps-grid::before { display: none; }
     .cta-banner { flex-direction: column; margin: 0 24px 60px; padding: 40px 28px; }
@@ -707,34 +948,10 @@ const GLOBAL_CSS = `
 `;
 
 const bikes = [
-  {
-    name: "Himalayan 450",
-    tag: "Adventure Tourer",
-    img: himalayan,
-    price: "₹3,500",
-    specs: ["450cc", "40 HP", "ABS"],
-  },
-  {
-    name: "Himalayan 411",
-    tag: "Classic Explorer",
-    img: classic350,
-    price: "₹2,800",
-    specs: ["411cc", "24.3 HP", "Disc Brake"],
-  },
-  {
-    name: "KTM Adventure 390",
-    tag: "Performance ADV",
-    img: ktm390,
-    price: "₹3,200",
-    specs: ["373cc", "43 HP", "ABS"],
-  },
-  {
-    name: "Royal Enfield 350",
-    tag: "Classic Cruiser",
-    img: scooter,
-    price: "₹2,200",
-    specs: ["349cc", "20.2 HP", "Drum/Disc"],
-  },
+  { name: "Himalayan 450", tag: "Adventure Tourer", img: himalayan, price: "₹3,500", specs: ["450cc", "40 HP", "ABS"] },
+  { name: "Himalayan 411", tag: "Classic Explorer", img: classic350, price: "₹2,800", specs: ["411cc", "24.3 HP", "Disc Brake"] },
+  { name: "KTM Adventure 390", tag: "Performance ADV", img: ktm390, price: "₹3,200", specs: ["373cc", "43 HP", "ABS"] },
+  { name: "Royal Enfield 350", tag: "Classic Cruiser", img: scooter, price: "₹2,200", specs: ["349cc", "20.2 HP", "Drum/Disc"] },
 ];
 
 const whyItems = [
@@ -752,6 +969,34 @@ const steps = [
   { num: "04", title: "Ride & Explore", desc: "We deliver to your door. You just ride into the mountains." },
 ];
 
+// Featured 3 packages for homepage teaser
+const FEATURED_PACKAGES = [
+  {
+    num: "01",
+    icon: "🏔️",
+    name: "Ladakh Round",
+    route: "Leh · Khardung La · Nubra · Pangong · Leh",
+    days: "7 Days",
+    slug: "ladakh-round",
+  },
+  {
+    num: "04",
+    icon: "🛣️",
+    name: "Delhi – Manali – Leh",
+    route: "Delhi · Chandigarh · Manali · Sarchu · Leh",
+    days: "10 Days",
+    slug: "delhi-manali-leh",
+  },
+  {
+    num: "09",
+    icon: "👑",
+    name: "Epic Himalayas",
+    route: "Delhi · Manali · Leh · Srinagar · Kashmir · Delhi",
+    days: "18 Days",
+    slug: "epic-himalayas",
+  },
+];
+
 // ────────────────────────────────────────────────────────────────────────────
 export default function Home() {
   const [openBike, setOpenBike] = useState(null);
@@ -760,7 +1005,6 @@ export default function Home() {
   const [reviews, setReviews] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [removingIds, setRemovingIds] = useState(new Set());
-  const heroBgRef = useRef(null);
 
   useEffect(() => {
     if (!document.getElementById("mll-global-css")) {
@@ -779,9 +1023,7 @@ export default function Home() {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/reviews`);
       setReviews(Array.isArray(res.data) ? res.data : []);
-    } catch {
-      setReviews([]);
-    }
+    } catch { setReviews([]); }
   };
 
   const handleChange = (e) => {
@@ -791,50 +1033,29 @@ export default function Home() {
 
   const submitReview = async (e) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.message.trim()) {
-      alert("Please fill all fields");
-      return;
-    }
+    if (!form.name.trim() || !form.message.trim()) { alert("Please fill all fields"); return; }
     setSubmitting(true);
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, form);
       setForm({ name: "", rating: 5, message: "" });
       fetchReviews();
     } catch (err) {
-      console.error("Submit error:", err.response?.data || err.message);
       alert(`Error: ${err.response?.data?.msg || err.message}`);
-    } finally {
-      setSubmitting(false);
-    }
+    } finally { setSubmitting(false); }
   };
 
-  // ── Delete a review with a smooth fade-out animation ──
   const deleteReview = async (id) => {
     if (!window.confirm("Delete this review?")) return;
-
-    // Trigger fade-out animation first
     setRemovingIds((prev) => new Set(prev).add(id));
-
-    // Wait for animation then call API and remove from state
     setTimeout(async () => {
       try {
         await axios.delete(`${import.meta.env.VITE_API_URL}/reviews/${id}`);
         setReviews((prev) => prev.filter((r) => r._id !== id));
       } catch (err) {
-        console.error("Delete error:", err.response?.data || err.message);
-        alert("Could not delete review. Please try again.");
-        // Restore on failure
-        setRemovingIds((prev) => {
-          const next = new Set(prev);
-          next.delete(id);
-          return next;
-        });
+        alert("Could not delete review.");
+        setRemovingIds((prev) => { const n = new Set(prev); n.delete(id); return n; });
       } finally {
-        setRemovingIds((prev) => {
-          const next = new Set(prev);
-          next.delete(id);
-          return next;
-        });
+        setRemovingIds((prev) => { const n = new Set(prev); n.delete(id); return n; });
       }
     }, 300);
   };
@@ -850,6 +1071,7 @@ export default function Home() {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/prices">Bikes</Link></li>
+          <li><Link to="/packages" className="nav-packages">Packages</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
         </ul>
@@ -865,10 +1087,7 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="hero">
-        <div
-          className={`hero-bg ${heroLoaded ? "loaded" : ""}`}
-          style={{ backgroundImage: `url(${heroImg})` }}
-        />
+        <div className={`hero-bg ${heroLoaded ? "loaded" : ""}`} style={{ backgroundImage: `url(${heroImg})` }} />
         <div className="hero-overlay" />
         <div className="hero-content">
           <h1 className="fade-up delay-2">
@@ -883,15 +1102,13 @@ export default function Home() {
           <div className="hero-buttons fade-up delay-4">
             <a
               href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
-              target="_blank"
-              rel="noopener noreferrer"
+              target="_blank" rel="noopener noreferrer"
               className="btn-primary"
             >
               📲 Book via WhatsApp
             </a>
-            <Link to="/prices" className="btn-secondary">
-              View All Bikes →
-            </Link>
+            <Link to="/packages" className="btn-gold">🗺️ View Tour Packages</Link>
+            <Link to="/prices" className="btn-secondary">View All Bikes →</Link>
           </div>
         </div>
       </section>
@@ -900,7 +1117,7 @@ export default function Home() {
       <div className="stats-strip">
         {[
           { num: "500+", label: "Happy Riders" },
-          { num: "4", label: "Premium Bikes" },
+          { num: "9", label: "Tour Packages" },
           { num: "18,380 ft", label: "Max Altitude Ridden" },
           { num: "24/7", label: "Roadside Support" },
         ].map((s) => (
@@ -919,11 +1136,7 @@ export default function Home() {
           {bikes.map((bike) => {
             const isOpen = openBike === bike.name;
             return (
-              <div
-                key={bike.name}
-                className="bike-card"
-                onClick={() => setOpenBike(isOpen ? null : bike.name)}
-              >
+              <div key={bike.name} className="bike-card" onClick={() => setOpenBike(isOpen ? null : bike.name)}>
                 <div style={{ overflow: "hidden" }}>
                   <img src={bike.img} alt={bike.name} />
                 </div>
@@ -932,17 +1145,13 @@ export default function Home() {
                   <h3 className="bike-name">{bike.name}</h3>
                   <div className="bike-divider" />
                   <div className="bike-specs">
-                    {bike.specs.map((s) => (
-                      <span className="bike-spec" key={s}>• {s}</span>
-                    ))}
+                    {bike.specs.map((s) => <span className="bike-spec" key={s}>• {s}</span>)}
                   </div>
                   <div className="bike-price-row" style={{ marginTop: "16px" }}>
                     <span className={`bike-price ${isOpen ? "visible" : "hidden"}`}>
                       {bike.price}<span style={{ fontSize: "13px", fontWeight: 400, color: "var(--muted)" }}> / day</span>
                     </span>
-                    {!isOpen && (
-                      <span style={{ fontSize: "13px", color: "var(--muted)" }}>Tap for price</span>
-                    )}
+                    {!isOpen && <span style={{ fontSize: "13px", color: "var(--muted)" }}>Tap for price</span>}
                     <div className="bike-cta-icon">→</div>
                   </div>
                 </div>
@@ -952,9 +1161,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── PACKAGES TEASER ── */}
+      <section className="packages-teaser">
+        <div className="pkg-teaser-bg-glow" />
+        <div className="pkg-teaser-header">
+          <div className="pkg-teaser-title-block">
+            <p className="pkg-teaser-eyebrow">Curated Journeys</p>
+            <h2 className="pkg-teaser-title">Tour<br /><span>Packages</span></h2>
+            <p className="pkg-teaser-subtitle">
+              9 legendary routes across the Himalayas — from weekend escapes to 18-day epics. Every road a story.
+            </p>
+          </div>
+          <Link to="/packages" className="btn-gold" style={{ flexShrink: 0, alignSelf: "flex-start", marginTop: "44px" }}>
+            All 9 Packages →
+          </Link>
+        </div>
+
+        <div className="pkg-scroll-row">
+          {FEATURED_PACKAGES.map((pkg) => (
+            <Link to="/packages" className="pkg-mini-card" key={pkg.slug}>
+              <span className="pkg-mini-num">{pkg.num}</span>
+              <span className="pkg-mini-icon">{pkg.icon}</span>
+              <p className="pkg-mini-name">{pkg.name}</p>
+              <p className="pkg-mini-route">{pkg.route}</p>
+              <div className="pkg-mini-footer">
+                <span className="pkg-mini-days">⏱ {pkg.days}</span>
+                <div className="pkg-mini-arrow">→</div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="pkg-teaser-cta">
+          <span className="pkg-more-badge">+6 more legendary routes</span>
+        </div>
+      </section>
+
       {/* ── WHY US ── */}
       <section className="section" style={{ paddingTop: 0 }}>
-        <p className="section-eyebrow">Why Motor Land Ladakh ?</p>
+        <p className="section-eyebrow">Why Motor Land Ladakh</p>
         <h2 className="section-title">Everything You Need</h2>
         <div className="why-grid">
           {whyItems.map((w) => (
@@ -985,20 +1230,18 @@ export default function Home() {
       {/* ── CTA BANNER ── */}
       <div className="cta-banner">
         <div className="cta-banner-text">
-          <h2>Ready to Conquer the mighty Umling La?</h2>
-          <p>
-            The world's highest motorable road awaits. Drop us a WhatsApp message and we'll have your bike ready within hours.
-          </p>
+          <h2>Ready to Conquer Khardung La?</h2>
+          <p>The world's highest motorable road awaits. Drop us a WhatsApp message and we'll have your bike ready within hours.</p>
         </div>
         <div className="cta-banner-actions">
           <a
             href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
-            target="_blank"
-            rel="noopener noreferrer"
+            target="_blank" rel="noopener noreferrer"
             className="btn-primary"
           >
             📲 WhatsApp Us Now
           </a>
+          <Link to="/packages" className="btn-gold">🗺️ Browse Packages</Link>
           <Link to="/contact" className="btn-secondary">Get a Quote →</Link>
         </div>
       </div>
@@ -1008,10 +1251,7 @@ export default function Home() {
         <p className="section-eyebrow">Testimonials</p>
         <h2 className="section-title">Riders' Stories</h2>
         <div className="reviews-layout">
-
-          {/* Left: reviews list */}
           <div>
-            {/* Static reviews — no delete button */}
             {[
               { text: "Best decision of my life. The Himalayan 450 handled Khardung La like a dream. Pickup was smooth and the team was incredibly helpful.", author: "Rahul S.", location: "Delhi", rating: 5 },
               { text: "Rented the KTM 390 for the Manali–Leh route. Zero issues, perfectly serviced, and the gear they provided was a lifesaver!", author: "Priya M.", location: "Mumbai", rating: 5 },
@@ -1023,16 +1263,10 @@ export default function Home() {
                 <p className="review-author">{r.author} <span style={{ color: "var(--muted)", fontWeight: 400 }}>— {r.location}</span></p>
               </div>
             ))}
-
-            {/* Dynamic reviews — with delete button */}
             {reviews.length > 0 && (
               <div style={{ marginTop: "16px" }}>
                 {reviews.map((r) => (
-                  <div
-                    className={`review-card ${removingIds.has(r._id) ? "removing" : ""}`}
-                    key={r._id}
-                  >
-                    {/* Delete button — appears on hover */}
+                  <div className={`review-card ${removingIds.has(r._id) ? "removing" : ""}`} key={r._id}>
                     <button
                       className={`review-delete-btn ${removingIds.has(r._id) ? "deleting" : ""}`}
                       onClick={() => deleteReview(r._id)}
@@ -1040,55 +1274,29 @@ export default function Home() {
                     >
                       🗑 Delete
                     </button>
-
                     <p className="review-stars">{"⭐".repeat(r.rating)}</p>
                     <p className="review-text">"{r.message}"</p>
                     <p className="review-author">{r.name}</p>
                     <p className="review-date">
-                      {new Date(r.createdAt).toLocaleDateString("en-IN", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}
+                      {new Date(r.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                     </p>
                   </div>
                 ))}
               </div>
             )}
-
             {reviews.length === 0 && (
               <p style={{ color: "var(--muted)", fontSize: "14px", marginTop: "16px" }}>
                 No community reviews yet — be the first!
               </p>
             )}
           </div>
-
-          {/* Right: form */}
           <form className="review-form" onSubmit={submitReview}>
             <h3 className="form-title">Share Your Ride</h3>
             <p className="form-sub">Helped by our crew? Tell the next rider.</p>
-
             <label className="form-label">Your Experience</label>
-            <textarea
-              name="message"
-              rows={4}
-              className="form-field"
-              placeholder="How was the bike, the service, the road?"
-              value={form.message}
-              onChange={handleChange}
-              style={{ resize: "none" }}
-            />
-
+            <textarea name="message" rows={4} className="form-field" placeholder="How was the bike, the service, the road?" value={form.message} onChange={handleChange} style={{ resize: "none" }} />
             <label className="form-label">Your Name</label>
-            <input
-              type="text"
-              name="name"
-              className="form-field"
-              placeholder="e.g. Rahul S."
-              value={form.name}
-              onChange={handleChange}
-            />
-
+            <input type="text" name="name" className="form-field" placeholder="e.g. Rahul S." value={form.name} onChange={handleChange} />
             <label className="form-label">Rating</label>
             <select name="rating" value={form.rating} onChange={handleChange} className="form-field">
               <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
@@ -1097,7 +1305,6 @@ export default function Home() {
               <option value="2">⭐⭐ Poor</option>
               <option value="1">⭐ Bad</option>
             </select>
-
             <button type="submit" className="form-submit" disabled={submitting}>
               {submitting ? "Posting..." : "Post Review"}
             </button>
@@ -1113,6 +1320,7 @@ export default function Home() {
         </div>
         <nav className="footer-links">
           <Link to="/prices">Bikes</Link>
+          <Link to="/packages">Packages</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
           <a href="https://wa.me/919797545493" target="_blank" rel="noopener noreferrer">WhatsApp</a>

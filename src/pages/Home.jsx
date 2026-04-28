@@ -1,7 +1,7 @@
 import heroImg from "../assets/hero.jpg";
 import himalayan from "../assets/bikes/himalayan.jpg";
 import classic350 from "../assets/bikes/classic350.jpg";
-import ktm390 from "../assets/bikes/ktm390.jpg";
+import Ktm390 from "../assets/bikes/Ktm390.jpg";
 import scooter from "../assets/bikes/scooter.jpg";
 import logo from "../assets/logo.png";
 import { useState, useEffect, useRef } from "react";

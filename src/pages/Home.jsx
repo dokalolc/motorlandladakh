@@ -184,6 +184,7 @@ const GLOBAL_CSS = `
     margin-bottom: 20px;
   }
   .hero h1 span { color: var(--red); }
+
   .hero-sub {
     font-size: 17px;
     color: rgba(232,228,220,0.65);
@@ -191,6 +192,7 @@ const GLOBAL_CSS = `
     margin-bottom: 40px;
     max-width: 480px;
     line-height: 1.6;
+    margin-left : 100px;
   }
   .hero-buttons {
     display: flex;

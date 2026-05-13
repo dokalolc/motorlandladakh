@@ -2,11 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-const https = require("https");
-const fs = require("fs");
-const app = require("./app");
 
 const app = express();
+
 const reviewRoutes = require("./routes/reviewRoutes");
 
 app.use(cors({ origin: "http://localhost:5173" }));
@@ -22,11 +20,8 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
-const options = {
-  key: fs.readFileSync("key.pem"),
-  cert: fs.readFileSync("cert.pem")
-};
+const PORT = process.env.PORT || 3000;
 
-https.createServer(options, app).listen(3000, () => {
-  console.log("Server running on https://localhost:3000");
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

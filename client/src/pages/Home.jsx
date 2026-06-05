@@ -914,9 +914,14 @@ const GLOBAL_CSS = `
     .footer { padding: 40px; }
   }
   @media (max-width: 768px) {
-    .navbar { padding: 0 24px; }
+    .navbar { padding: 0 16px; height: 56px; }
+    .navbar .logo img { height: 48px; margin-left: 0; }
     .navbar ul { display: none; }
-    .hero-content { padding: 0 28px 60px; }
+    .navbar-cta { font-size: 11px !important; padding: 6px 12px; }
+    .hero { height: 100svh; min-height: unset; }
+    .hero-content { padding: 0 20px 40px; }
+    .hero-content h1 { font-size: 36px !important; }
+    .hero-content p { font-size: 15px !important; }
     .stats-strip { grid-template-columns: repeat(2,1fr); }
     .section { padding: 60px 24px; }
     .packages-teaser { padding: 60px 24px; }

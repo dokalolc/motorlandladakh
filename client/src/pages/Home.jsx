@@ -125,7 +125,7 @@ const GLOBAL_CSS = `
   /* ── Hero ── */
   .hero {
     position: relative;
-    height: 50vh;
+    height: 100vh;
     min-height: 640px;
     display: flex;
     align-items: flex-end;
@@ -133,7 +133,7 @@ const GLOBAL_CSS = `
   }
   @media (max-width: 768px) {
     .hero {
-      height: 50vh !important;
+      height: 75vh !important;
       min-height: unset !important;
     }
   }
@@ -1022,12 +1022,19 @@ const FEATURED_PACKAGES = [
 // ────────────────────────────────────────────────────────────────────────────
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [openBike, setOpenBike] = useState(null);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [form, setForm] = useState({ name: "", rating: 5, message: "" });
   const [reviews, setReviews] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [removingIds, setRemovingIds] = useState(new Set());
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (!document.getElementById("mll-global-css")) {
@@ -1114,10 +1121,10 @@ export default function Home() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="hero" style={{ height: window.innerWidth <= 768 ? "75vh" : "100vh", minHeight: "unset" }}>
+      <section className="hero" style={{ height: isMobile ? "60vh" : "100vh", minHeight: "unset" }}>
         <div className={`hero-bg ${heroLoaded ? "loaded" : ""}`} style={{ backgroundImage: `url(${heroImg})` }} />
         <div className="hero-overlay" />
-        <div className="hero-content" style={{ padding: window.innerWidth <= 768 ? "0 20px 30px" : "0 80px 80px" }}>
+        <div className="hero-content" style={{ padding: isMobile ? "0 20px 30px" : "0 80px 80px" }}>
           <h1 className="fade-up delay-2">
             Ride The<br />
             <span>Roof of</span><br />

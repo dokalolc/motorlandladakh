@@ -133,9 +133,8 @@ const GLOBAL_CSS = `
   }
   @media (max-width: 768px) {
     .hero {
-      height: 100svh;
-      min-height: unset;
-      align-items: center;
+      height: 75vh !important;
+      min-height: unset !important;
     }
   }
   .hero-bg {
@@ -163,6 +162,15 @@ const GLOBAL_CSS = `
     z-index: 2;
     padding: 0 80px 80px;
     max-width: 860px;
+  }
+  @media (max-width: 768px) {
+    .hero-content {
+      padding: 0 20px 30px !important;
+    }
+    .hero {
+      align-items: flex-end !important;
+      justify-content: center;
+    }
   }
   .hero-eyebrow {
     font-family: 'Rajdhani', sans-serif;

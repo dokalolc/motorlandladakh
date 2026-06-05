@@ -133,7 +133,7 @@ const GLOBAL_CSS = `
   }
   @media (max-width: 768px) {
     .hero {
-      height: 75vh !important;
+      height: 50vh !important;
       min-height: unset !important;
     }
   }

@@ -8,7 +8,13 @@ const app = express();
 
 const reviewRoutes = require("./routes/reviewRoutes");
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: [
+  "http://localhost:5173",
+  "https://motorlandladakh-3m5r.vercel.app",
+   "https://www.motorlandladakh.com",
+  "https://motorlandladakh.com"
+]
+}));
 app.use(express.json());
 
 app.use("/reviews", reviewRoutes);

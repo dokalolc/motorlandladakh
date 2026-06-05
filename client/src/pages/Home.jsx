@@ -67,7 +67,7 @@ const GLOBAL_CSS = `
     border-bottom: 1px solid var(--border);
     transition: background 0.3s;
   }
-  .navbar .logo img { height: 275px; margin-left: -110px; object-fit: contain; }
+  .navbar .logo img { height: 56px; margin-left: 0; object-fit: contain; }
   .navbar ul { display: flex; gap: 36px; list-style: none; position: absolute; left: 50%; transform: translateX(-50%); }
   .navbar ul li a {
     font-family: 'Rajdhani', sans-serif;
@@ -130,6 +130,13 @@ const GLOBAL_CSS = `
     display: flex;
     align-items: flex-end;
     overflow: hidden;
+  }
+  @media (max-width: 768px) {
+    .hero {
+      height: 100svh;
+      min-height: unset;
+      align-items: center;
+    }
   }
   .hero-bg {
     position: absolute;

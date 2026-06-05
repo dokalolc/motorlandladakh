@@ -133,7 +133,7 @@ const GLOBAL_CSS = `
   }
   @media (max-width: 768px) {
     .hero {
-      height: 7vh !important;
+      height: 75vh !important;
       min-height: unset !important;
     }
   }
@@ -1114,10 +1114,10 @@ export default function Home() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="hero">
+      <section className="hero" style={{ height: window.innerWidth <= 768 ? "75vh" : "100vh", minHeight: "unset" }}>
         <div className={`hero-bg ${heroLoaded ? "loaded" : ""}`} style={{ backgroundImage: `url(${heroImg})` }} />
         <div className="hero-overlay" />
-        <div className="hero-content">
+        <div className="hero-content" style={{ padding: window.innerWidth <= 768 ? "0 20px 30px" : "0 80px 80px" }}>
           <h1 className="fade-up delay-2">
             Ride The<br />
             <span>Roof of</span><br />

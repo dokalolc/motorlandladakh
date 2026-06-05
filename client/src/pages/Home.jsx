@@ -1001,6 +1001,7 @@ const FEATURED_PACKAGES = [
 
 // ────────────────────────────────────────────────────────────────────────────
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [openBike, setOpenBike] = useState(null);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [form, setForm] = useState({ name: "", rating: 5, message: "" });
@@ -1070,12 +1071,12 @@ export default function Home() {
         <div className="logo">
           <img src={logo} alt="Motor Land Ladakh" />
         </div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/prices">Bikes</Link></li>
-          <li><Link to="/packages" className="nav-packages">Packages</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+        <ul className={menuOpen ? "open" : ""}>
+          <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+          <li><Link to="/prices" onClick={() => setMenuOpen(false)}>Bikes</Link></li>
+          <li><Link to="/packages" className="nav-packages" onClick={() => setMenuOpen(false)}>Packages</Link></li>
+          <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
+          <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
         </ul>
         <a
           href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
@@ -1085,6 +1086,11 @@ export default function Home() {
         >
           📲 Book Now
         </a>
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
 
       {/* ── HERO ── */}

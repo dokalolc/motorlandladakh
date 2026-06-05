@@ -125,7 +125,7 @@ const GLOBAL_CSS = `
   /* ── Hero ── */
   .hero {
     position: relative;
-    height: 100vh;
+    height: 50vh;
     min-height: 640px;
     display: flex;
     align-items: flex-end;

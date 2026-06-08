@@ -1051,9 +1051,11 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!document.getElementById("mll-global-css")) {
+    if (!document.getElementById("mll-global-css-v2")) {
+      const old = document.getElementById("mll-global-css");
+      if (old) old.remove();
       const style = document.createElement("style");
-      style.id = "mll-global-css";
+      style.id = "mll-global-css-v2";
       style.textContent = GLOBAL_CSS;
       document.head.appendChild(style);
     }

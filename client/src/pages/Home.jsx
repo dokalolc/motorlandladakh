@@ -67,7 +67,7 @@ const GLOBAL_CSS = `
     border-bottom: 1px solid var(--border);
     transition: background 0.3s;
   }
-  .navbar .logo img { height: 56px; margin-left: 0; object-fit: contain; }
+  .navbar .logo img { height: 250px; margin-left: -110px; object-fit: contain; }
   .navbar ul { display: flex; gap: 36px; list-style: none; position: absolute; left: 50%; transform: translateX(-50%); }
   .navbar ul li a {
     font-family: 'Rajdhani', sans-serif;
@@ -166,10 +166,6 @@ const GLOBAL_CSS = `
   @media (max-width: 768px) {
     .hero-content {
       padding: 0 20px 30px !important;
-    }
-    .hero {
-      align-items: flex-end !important;
-      justify-content: center;
     }
   }
   .hero-eyebrow {
@@ -918,6 +914,26 @@ const GLOBAL_CSS = `
   }
   .footer-links a:hover { color: var(--red); }
 
+  /* ── Hamburger ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    z-index: 1001;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
   /* ── Responsive ── */
   @media (max-width: 1024px) {
     .section { padding: 80px 40px; }
@@ -929,14 +945,12 @@ const GLOBAL_CSS = `
     .footer { padding: 40px; }
   }
   @media (max-width: 768px) {
-    .navbar { padding: 0 16px; height: 56px; }
-    .navbar .logo img { height: 48px; margin-left: 0; }
+    .navbar { padding: 0 16px; height: 70px; }
+    .navbar .logo img { height: 100px; margin-left: -20px; }
     .navbar ul { display: none; }
+    .navbar ul.open { display: flex; flex-direction: column; position: fixed; top: 70px; right: 0; left: auto; width: 260px; background: rgba(12,12,14,0.98); padding: 20px 16px; gap: 16px; z-index: 999; border-left: 1px solid rgba(255,255,255,0.07); box-shadow: -8px 0 24px rgba(0,0,0,0.4); transform: none; }
     .navbar-cta { font-size: 11px !important; padding: 6px 12px; }
-    .hero { height: 100svh; min-height: unset; }
-    .hero-content { padding: 0 20px 40px; }
-    .hero-content h1 { font-size: 36px !important; }
-    .hero-content p { font-size: 15px !important; }
+    .hamburger { display: flex; }
     .stats-strip { grid-template-columns: repeat(2,1fr); }
     .section { padding: 60px 24px; }
     .packages-teaser { padding: 60px 24px; }
@@ -1121,7 +1135,7 @@ export default function Home() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="hero" style={{ height: isMobile ? "60vh" : "100vh", minHeight: "unset" }}>
+      <section className="hero" style={{ height: isMobile ? "60vh" : "100vh", minHeight: "unset", alignItems: isMobile ? "center" : "flex-end" }}>
         <div className={`hero-bg ${heroLoaded ? "loaded" : ""}`} style={{ backgroundImage: `url(${heroImg})` }} />
         <div className="hero-overlay" />
         <div className="hero-content" style={{ padding: isMobile ? "0 20px 30px" : "0 80px 80px" }}>

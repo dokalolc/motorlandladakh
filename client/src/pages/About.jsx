@@ -1,7 +1,9 @@
 import logo from "../assets/logo.png";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function About() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div style={{ background: "#0a0a0a", minHeight: "100vh", color: "#fff" }}>
 
@@ -10,13 +12,33 @@ export default function About() {
         <div className="logo">
           <img src={logo} alt="Motor Land Ladakh" />
         </div>
-        <ul>
-          <li><Link to="/" style={{ color: "#fff", textDecoration: "none" }}>Home</Link></li>
-          <li><Link to="/prices" style={{ color: "#fff", textDecoration: "none" }}>Bikes</Link></li>
-          <li><Link to="/about" style={{ color: "#fff", textDecoration: "none" }}>About</Link></li>
-          <li><Link to="/contact" style={{ color: "#fff", textDecoration: "none" }}>Contact</Link></li>
+        <ul className={menuOpen ? "open" : ""}>
+          <li><Link to="/" style={{ color: "#fff", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>Home</Link></li>
+          <li><Link to="/prices" style={{ color: "#fff", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>Bikes</Link></li>
+          <li><Link to="/about" style={{ color: "#fff", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>About</Link></li>
+          <li><Link to="/contact" style={{ color: "#fff", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>Contact</Link></li>
         </ul>
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{ display: "none", flexDirection: "column", gap: "5px", cursor: "pointer", background: "none", border: "none", padding: "4px", zIndex: 1001 }}
+          className="hamburger"
+          aria-label="Toggle menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
       </nav>
+
+      <style>{`
+        .hamburger { display: none; }
+        @media (max-width: 768px) {
+          .navbar { padding: 0 16px !important; height: 70px !important; }
+          .navbar .logo img { height: 100px !important; margin-left: -20px !important; }
+          .navbar ul { display: none !important; }
+          .navbar ul.open { display: flex !important; flex-direction: column; position: fixed; top: 70px; right: 0; left: auto; width: 260px; background: rgba(10,10,10,0.98); padding: 20px 16px; gap: 16px; z-index: 999; border-left: 1px solid #222; box-shadow: -8px 0 24px rgba(0,0,0,0.4); }
+          .hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1001; }
+          .hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; }
+        }
+      `}</style>
 
       {/* HERO BANNER */}
       <div style={{

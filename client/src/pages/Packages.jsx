@@ -259,6 +259,25 @@ const ALL_CSS = `
   .pkg-bottom-cta p { font-size: 15px; color: var(--muted); margin-bottom: 36px; line-height: 1.7; max-width: 480px; margin-left: auto; margin-right: auto; }
   .pkg-bottom-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
+  /* ── Hamburger ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    z-index: 1001;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+  }
+
   @media (max-width: 1100px) {
     .pkg-grid { grid-template-columns: 1fr; padding: 0 40px 80px; }
     .pkg-hero { padding: 140px 40px 60px; }
@@ -266,8 +285,11 @@ const ALL_CSS = `
     .pkg-bottom-cta { padding: 60px 40px; }
   }
   @media (max-width: 768px) {
-    .navbar { padding: 0 24px; }
+    .navbar { padding: 0 16px; height: 70px; }
+    .navbar .logo img { height: 100px; margin-left: -20px; }
     .navbar ul { display: none; }
+    .navbar ul.open { display: flex; flex-direction: column; position: fixed; top: 70px; right: 0; left: auto; width: 260px; background: rgba(12,12,14,0.98); padding: 20px 16px; gap: 16px; z-index: 999; border-left: 1px solid rgba(255,255,255,0.07); box-shadow: -8px 0 24px rgba(0,0,0,0.4); }
+    .hamburger { display: flex; }
     .pkg-hero { padding: 120px 24px 48px; }
     .pkg-filters { padding: 0 24px 32px; }
     .pkg-grid { padding: 0 24px 60px; }
@@ -481,6 +503,7 @@ function matchFilter(pkg, f) {
 export default function Packages() {
   const [openItinerary, setOpenItinerary] = useState(null);
   const [activeFilter, setActiveFilter]   = useState("All");
+  const [menuOpen, setMenuOpen]           = useState(false);
 
   useEffect(() => {
     if (!document.getElementById("mll-pkg-css")) {
@@ -503,12 +526,12 @@ export default function Packages() {
         <div className="logo">
           <img src={logo} alt="Motor Land Ladakh" />
         </div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/prices">Bikes</Link></li>
-          <li><Link to="/packages" className="nav-packages">Packages</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+        <ul className={menuOpen ? "open" : ""}>
+          <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+          <li><Link to="/prices" onClick={() => setMenuOpen(false)}>Bikes</Link></li>
+          <li><Link to="/packages" className="nav-packages" onClick={() => setMenuOpen(false)}>Packages</Link></li>
+          <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
+          <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
         </ul>
         <a
           href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
@@ -517,6 +540,9 @@ export default function Packages() {
         >
           📲 Book Now
         </a>
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
       </nav>
 
       {/* ── HERO ── */}

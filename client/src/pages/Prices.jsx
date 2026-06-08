@@ -63,6 +63,25 @@ const PRICES_CSS = `
   }
   .navbar .logo img { height: 250px; margin-left: -110px; object-fit: contain; }
   .navbar ul { display: flex; gap: 36px; list-style: none; }
+
+  /* ── Hamburger ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    z-index: 1001;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+  }
   .navbar ul li a {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 600;
@@ -494,8 +513,11 @@ const PRICES_CSS = `
     .prices-hero-side { display: none; }
   }
   @media (max-width: 768px) {
-    .navbar { padding: 0 24px; }
+    .navbar { padding: 0 16px; height: 70px; }
+    .navbar .logo img { height: 100px !important; margin-left: -20px !important; }
     .navbar ul { display: none; }
+    .navbar ul.open { display: flex; flex-direction: column; position: fixed; top: 70px; right: 0; left: auto; width: 260px; background: rgba(12,12,14,0.98); padding: 20px 16px; gap: 16px; z-index: 999; border-left: 1px solid rgba(255,255,255,0.07); box-shadow: -8px 0 24px rgba(0,0,0,0.4); }
+    .hamburger { display: flex; }
     .prices-hero-inner { padding: 40px 24px; }
     .prices-section { padding: 40px 24px; }
     .prices-note { margin: 0 24px 40px; flex-direction: column; }
@@ -558,6 +580,7 @@ const included = [
 
 // ────────────────────────────────────────────────────────────────────────────
 export default function Prices() {
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     if (!document.getElementById("mll-prices-css")) {
       const style = document.createElement("style");
@@ -581,11 +604,11 @@ export default function Prices() {
         <div className="logo">
           <img src={logo} alt="Motor Land Ladakh" />
         </div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/prices" className="active">Bikes</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+        <ul className={menuOpen ? "open" : ""}>
+          <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+          <li><Link to="/prices" className="active" onClick={() => setMenuOpen(false)}>Bikes</Link></li>
+          <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
+          <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
         </ul>
         <a
           href="https://wa.me/919797545493?text=Hi,%20I%20want%20to%20book%20a%20bike%20in%20Ladakh"
@@ -595,6 +618,11 @@ export default function Prices() {
         >
           📲 Book Now
         </a>
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
 
       {/* ── HERO BANNER ── */}
